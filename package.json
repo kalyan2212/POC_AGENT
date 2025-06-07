@@ -1,0 +1,20 @@
+{
+  "name": "poc-agent",
+  "version": "1.0.0",
+  "description": "POC for Code Agent - Frontend-Backend Integration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:fixed": "node server-fixed.js",
+    "dev": "node server.js",
+    "test": "node test-integration.js",
+    "demo": "echo 'Start server with npm start, then open index.html in browser'"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "keywords": ["poc", "agent", "frontend", "backend", "integration"],
+  "author": "Code Agent",
+  "license": "MIT"
+}

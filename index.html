@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC Agent - Frontend Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .error {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c00;
+        }
+        .success {
+            background-color: #efe;
+            border: 1px solid #cfc;
+            color: #060;
+        }
+        .loading {
+            background-color: #fef;
+            border: 1px solid #fcf;
+            color: #606;
+        }
+        button {
+            background-color: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #005a85;
+        }
+        .task-list {
+            margin-top: 20px;
+        }
+        .task-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007cba;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>POC Agent - Frontend Integration Test</h1>
+        <p>This POC demonstrates frontend-backend integration issues and their fixes.</p>
+        
+        <div id="status" class="status loading">Ready to test integration...</div>
+        
+        <button onclick="testIntegration()">Test Backend Integration</button>
+        <button onclick="testHealthCheck()">Test Health Check</button>
+        
+        <div id="data-container">
+            <h3>Backend Data:</h3>
+            <div id="task-list" class="task-list"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3001';
+        
+        function updateStatus(message, type = 'loading') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+        }
+
+        function displayTasks(tasks) {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+            
+            if (tasks && tasks.length > 0) {
+                tasks.forEach(task => {
+                    const taskDiv = document.createElement('div');
+                    taskDiv.className = 'task-item';
+                    taskDiv.innerHTML = `
+                        <strong>Task ${task.id}:</strong> ${task.name} 
+                        <span style="color: ${task.completed ? 'green' : 'red'}">
+                            (${task.completed ? 'Completed' : 'Pending'})
+                        </span>
+                    `;
+                    taskList.appendChild(taskDiv);
+                });
+            } else {
+                taskList.innerHTML = '<p>No tasks available</p>';
+            }
+        }
+
+        async function testIntegration() {
+            updateStatus('Testing backend integration...', 'loading');
+            
+            try {
+                // INTENTIONAL ISSUE: Wrong endpoint path
+                // Backend serves on /data but frontend calls /api/data
+                const response = await fetch(`${API_BASE_URL}/api/data`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                updateStatus(`Integration successful! Received ${data.data?.length || 0} tasks`, 'success');
+                displayTasks(data.data);
+                
+            } catch (error) {
+                updateStatus(`Integration failed: ${error.message}`, 'error');
+                console.error('Integration error:', error);
+                
+                // Display detailed error information
+                document.getElementById('task-list').innerHTML = `
+                    <div class="error">
+                        <h4>Common Integration Issues:</h4>
+                        <ul>
+                            <li>CORS not enabled on backend</li>
+                            <li>Wrong API endpoint URL</li>
+                            <li>Backend server not running</li>
+                            <li>Network connectivity issues</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        async function testHealthCheck() {
+            updateStatus('Checking backend health...', 'loading');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                updateStatus(`Health check passed: ${data.service}`, 'success');
+                
+            } catch (error) {
+                updateStatus(`Health check failed: ${error.message}`, 'error');
+                console.error('Health check error:', error);
+            }
+        }
+
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                updateStatus('Click "Test Backend Integration" to start', 'loading');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
