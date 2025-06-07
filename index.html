@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Tracking - Track Your Shipment</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>TrackExpress</h1>
+                <span class="tagline">Track your package</span>
+            </div>
+            <nav class="nav">
+                <a href="#tracking">Tracking</a>
+                <a href="#shipping">Shipping</a>
+                <a href="#support">Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <h2>Track a Package</h2>
+                <p class="subtitle">Enter your tracking number to get real-time updates</p>
+                
+                <div class="search-container">
+                    <input type="text" 
+                           id="trackingInput" 
+                           placeholder="Enter tracking number (e.g., 123456789012)" 
+                           maxlength="50">
+                    <button id="trackBtn" class="track-btn">Track Package</button>
+                </div>
+                
+                <div class="search-tips">
+                    <p>Track up to 10 packages at once. Separate tracking numbers with commas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="container">
+                <!-- Package Status Header -->
+                <div class="status-header">
+                    <div class="status-badge" id="statusBadge">
+                        <span id="statusText">In Transit</span>
+                    </div>
+                    <div class="tracking-number">
+                        <span>Tracking #: <strong id="displayTrackingNumber"></strong></span>
+                    </div>
+                </div>
+
+                <!-- Progress Timeline -->
+                <div class="progress-timeline">
+                    <div class="timeline-container">
+                        <div class="timeline-step completed" data-step="1">
+                            <div class="step-icon">✓</div>
+                            <div class="step-info">
+                                <h4>Package Shipped</h4>
+                                <p class="step-date">Dec 5, 2024 • 2:30 PM</p>
+                                <p class="step-location">Chicago, IL</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step completed" data-step="2">
+                            <div class="step-icon">✓</div>
+                            <div class="step-info">
+                                <h4>In Transit</h4>
+                                <p class="step-date">Dec 6, 2024 • 8:15 AM</p>
+                                <p class="step-location">Indianapolis, IN</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step active" data-step="3">
+                            <div class="step-icon">📦</div>
+                            <div class="step-info">
+                                <h4>Out for Delivery</h4>
+                                <p class="step-date">Today • 9:45 AM</p>
+                                <p class="step-location">New York, NY</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step pending" data-step="4">
+                            <div class="step-icon">🏠</div>
+                            <div class="step-info">
+                                <h4>Delivered</h4>
+                                <p class="step-date">Expected today by 6:00 PM</p>
+                                <p class="step-location">New York, NY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipment Details -->
+                <div class="shipment-details">
+                    <div class="details-grid">
+                        <div class="detail-card">
+                            <h3>Shipment Facts</h3>
+                            <div class="fact-row">
+                                <span class="label">Service:</span>
+                                <span class="value">Express Overnight</span>
+                            </div>
+                            <div class="fact-row">
+                                <span class="label">Weight:</span>
+                                <span class="value">2.5 lbs</span>
+                            </div>
+                            <div class="fact-row">
+                                <span class="label">Dimensions:</span>
+                                <span class="value">12" x 8" x 4"</span>
+                            </div>
+                            <div class="fact-row">
+                                <span class="label">Ship Date:</span>
+                                <span class="value">Dec 5, 2024</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-card">
+                            <h3>Delivery Information</h3>
+                            <div class="address">
+                                <p><strong>Deliver to:</strong></p>
+                                <p>John Smith<br>
+                                123 Main Street<br>
+                                New York, NY 10001<br>
+                                United States</p>
+                            </div>
+                            <div class="delivery-options">
+                                <button class="delivery-btn">📍 Track on Map</button>
+                                <button class="delivery-btn">📱 Get SMS Updates</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tracking History -->
+                <div class="tracking-history">
+                    <h3>Tracking History</h3>
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-time">
+                                <span class="date">Dec 7, 2024</span>
+                                <span class="time">9:45 AM</span>
+                            </div>
+                            <div class="history-status">
+                                <strong>Out for delivery</strong>
+                                <p>NEW YORK, NY</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-time">
+                                <span class="date">Dec 6, 2024</span>
+                                <span class="time">8:15 AM</span>
+                            </div>
+                            <div class="history-status">
+                                <strong>At destination sort facility</strong>
+                                <p>INDIANAPOLIS, IN</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-time">
+                                <span class="date">Dec 5, 2024</span>
+                                <span class="time">11:30 PM</span>
+                            </div>
+                            <div class="history-status">
+                                <strong>Departed shipping facility</strong>
+                                <p>CHICAGO, IL</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-time">
+                                <span class="date">Dec 5, 2024</span>
+                                <span class="time">2:30 PM</span>
+                            </div>
+                            <div class="history-status">
+                                <strong>Package shipped</strong>
+                                <p>CHICAGO, IL</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Section -->
+        <section class="error-section" id="errorSection" style="display: none;">
+            <div class="container">
+                <div class="error-message">
+                    <h3>⚠️ Tracking number not found</h3>
+                    <p>Please check your tracking number and try again. Make sure you've entered the complete number.</p>
+                    <button id="tryAgainBtn" class="track-btn">Try Again</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#tracking">Track a Package</a></li>
+                        <li><a href="#shipping">Ship Now</a></li>
+                        <li><a href="#support">Customer Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TrackExpress. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
