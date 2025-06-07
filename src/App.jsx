@@ -4,11 +4,15 @@ import './App.css';
 function App() {
   const [page, setPage] = useState('landing');
   const [message, setMessage] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
+    
+    // Add selected country to the data
+    data.country = selectedCountry;
 
     try {
       const response = await fetch('http://localhost:5000/upload', {
@@ -37,6 +41,9 @@ function App() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
+    
+    // Add selected country to the data
+    data.country = selectedCountry;
 
     try {
       const response = await fetch('http://localhost:5000/insurance', {
@@ -66,13 +73,50 @@ function App() {
       <main>
         {page === 'landing' && (
           <div>
-            <button onClick={() => setPage('form')}>Update Record</button>
-            <button onClick={() => setPage('search')}>Search Record</button>
+            <h2>Select Your Country</h2>
+            <div style={{ marginBottom: '2rem' }}>
+              <label>
+                <input 
+                  type="radio" 
+                  name="country" 
+                  value="USA" 
+                  checked={selectedCountry === 'USA'}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                />
+                <span style={{ marginLeft: '0.5rem' }}>United States (USD)</span>
+              </label>
+              <br />
+              <label>
+                <input 
+                  type="radio" 
+                  name="country" 
+                  value="India" 
+                  checked={selectedCountry === 'India'}
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                />
+                <span style={{ marginLeft: '0.5rem' }}>India (INR)</span>
+              </label>
+            </div>
+            <button 
+              onClick={() => setPage('form')} 
+              disabled={!selectedCountry}
+              style={{ opacity: selectedCountry ? 1 : 0.5 }}
+            >
+              Update Record
+            </button>
+            <button 
+              onClick={() => setPage('search')} 
+              disabled={!selectedCountry}
+              style={{ opacity: selectedCountry ? 1 : 0.5 }}
+            >
+              Search Record
+            </button>
           </div>
         )}
 
         {page === 'form' && (
           <div>
+            <h2>Update Record - {selectedCountry}</h2>
             <form onSubmit={handleSubmit}>
               <label>
                 First Name:
@@ -106,12 +150,13 @@ function App() {
               <br />
               <button type="submit">Submit</button>
             </form>
-            <button onClick={() => setPage('landing')}>Back to Landing Page</button>
+            <button onClick={() => { setPage('landing'); setSelectedCountry(''); }}>Back to Landing Page</button>
           </div>
         )}
 
         {page === 'search' && (
           <div>
+            <h2>Search Record - {selectedCountry}</h2>
             <form onSubmit={handleSearch}>
               <label>
                 Unique Identifier:
@@ -120,14 +165,14 @@ function App() {
               <br />
               <button type="submit">Search Insurance Premium</button>
             </form>
-            <button onClick={() => setPage('landing')}>Back to Landing Page</button>
+            <button onClick={() => { setPage('landing'); setSelectedCountry(''); }}>Back to Landing Page</button>
           </div>
         )}
 
         {page === 'message' && (
           <div>
             <p>{message}</p>
-            <button onClick={() => setPage('landing')}>Back to Landing Page</button>
+            <button onClick={() => { setPage('landing'); setSelectedCountry(''); }}>Back to Landing Page</button>
           </div>
         )}
       </main>
