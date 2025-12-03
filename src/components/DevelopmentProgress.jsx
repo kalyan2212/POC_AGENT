@@ -1,5 +1,7 @@
 import './DevelopmentProgress.css';
 
+const MAX_TEST_NAME_LENGTH = 30;
+
 function DevelopmentProgress({ 
   designArtifacts, 
   generatedCode, 
@@ -114,7 +116,7 @@ function DevelopmentProgress({
                 className={`test-item ${test.status}`}
               >
                 <span className="test-type">{test.type}</span>
-                <span className="test-name">{test.name.substring(0, 30)}...</span>
+                <span className="test-name">{test.name.substring(0, MAX_TEST_NAME_LENGTH)}...</span>
                 <span 
                   className="test-status"
                   style={{ color: getTestStatusColor(test.status) }}

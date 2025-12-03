@@ -8,6 +8,17 @@ import DeploymentStatus from './DeploymentStatus';
 import { OrchestratorAgent } from '../agents/OrchestratorAgent';
 import { AgentType, AgentStatus as Status, WorkflowPhase } from '../agents/AgentTypes';
 
+// Helper function to determine phase class
+const getPhaseClass = (currentPhase, targetPhase, completedAfterPhases) => {
+  if (currentPhase === targetPhase || (Array.isArray(targetPhase) && targetPhase.includes(currentPhase))) {
+    return 'active';
+  }
+  if (completedAfterPhases.includes(currentPhase)) {
+    return 'completed';
+  }
+  return '';
+};
+
 function AgenticFramework() {
   const [currentPhase, setCurrentPhase] = useState(WorkflowPhase.INPUT);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -160,32 +171,32 @@ function AgenticFramework() {
         <p className="subtitle">Transform business requirements into working applications with AI agents</p>
         
         <div className="workflow-progress">
-          <div className={`phase ${currentPhase === WorkflowPhase.INPUT ? 'active' : currentPhase !== WorkflowPhase.INPUT ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, WorkflowPhase.INPUT, [WorkflowPhase.ANALYSIS, WorkflowPhase.USER_STORIES, WorkflowPhase.VALIDATION, WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING, WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">📋</span>
             <span className="phase-label">Input</span>
           </div>
           <div className="phase-connector"></div>
-          <div className={`phase ${currentPhase === WorkflowPhase.ANALYSIS ? 'active' : [WorkflowPhase.USER_STORIES, WorkflowPhase.VALIDATION, WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING, WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED].includes(currentPhase) ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, WorkflowPhase.ANALYSIS, [WorkflowPhase.USER_STORIES, WorkflowPhase.VALIDATION, WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING, WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">🔍</span>
             <span className="phase-label">Analysis</span>
           </div>
           <div className="phase-connector"></div>
-          <div className={`phase ${currentPhase === WorkflowPhase.VALIDATION ? 'active' : [WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING, WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED].includes(currentPhase) ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, WorkflowPhase.VALIDATION, [WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING, WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">✅</span>
             <span className="phase-label">Validation</span>
           </div>
           <div className="phase-connector"></div>
-          <div className={`phase ${[WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING].includes(currentPhase) ? 'active' : [WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED].includes(currentPhase) ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, [WorkflowPhase.DEVELOPMENT, WorkflowPhase.TESTING], [WorkflowPhase.QUALITY_CHECK, WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">⚙️</span>
             <span className="phase-label">Development</span>
           </div>
           <div className="phase-connector"></div>
-          <div className={`phase ${currentPhase === WorkflowPhase.QUALITY_CHECK ? 'active' : [WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED].includes(currentPhase) ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, WorkflowPhase.QUALITY_CHECK, [WorkflowPhase.DEPLOYMENT, WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">📊</span>
             <span className="phase-label">Quality</span>
           </div>
           <div className="phase-connector"></div>
-          <div className={`phase ${currentPhase === WorkflowPhase.DEPLOYMENT ? 'active' : currentPhase === WorkflowPhase.COMPLETED ? 'completed' : ''}`}>
+          <div className={`phase ${getPhaseClass(currentPhase, WorkflowPhase.DEPLOYMENT, [WorkflowPhase.COMPLETED])}`}>
             <span className="phase-icon">🚀</span>
             <span className="phase-label">Deploy</span>
           </div>

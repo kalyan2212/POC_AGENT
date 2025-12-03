@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './UserStoryValidation.css';
+import { ApplicationType } from '../agents/AgentTypes';
 
 function UserStoryValidation({ userStories, applicationType, onApprove, onRevise }) {
   const [editedStories, setEditedStories] = useState(userStories);
@@ -29,7 +30,7 @@ function UserStoryValidation({ userStories, applicationType, onApprove, onRevise
       <div className="validation-header">
         <h2>📝 User Stories Validation</h2>
         <div className="app-type-badge">
-          {applicationType === 'new' ? '🆕 New Application' : '🔄 Existing Application Update'}
+          {applicationType === ApplicationType.NEW ? '🆕 New Application' : '🔄 Existing Application Update'}
         </div>
       </div>
       
