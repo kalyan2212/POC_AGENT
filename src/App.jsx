@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './App.css';
+import AgenticFramework from './components/AgenticFramework';
 
 function App() {
+  const [appMode, setAppMode] = useState('selector'); // 'selector', 'agentic', 'insurance'
   const [page, setPage] = useState('landing');
   const [message, setMessage] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -65,8 +67,68 @@ function App() {
     }
   };
 
+  // Application Selector
+  if (appMode === 'selector') {
+    return (
+      <div className="app-selector">
+        <h1>🚀 POC Agent Platform</h1>
+        <p className="selector-subtitle">Choose an application to explore</p>
+        
+        <div className="app-cards">
+          <div className="app-card agentic-card" onClick={() => setAppMode('agentic')}>
+            <div className="card-icon">🤖</div>
+            <h2>Agentic AI Framework</h2>
+            <p>Transform business requirements into working applications using AI agents</p>
+            <ul className="feature-list">
+              <li>✓ Automatic requirement analysis</li>
+              <li>✓ User story generation</li>
+              <li>✓ Code generation & testing</li>
+              <li>✓ Quality assurance</li>
+              <li>✓ Demo deployment</li>
+            </ul>
+            <button className="launch-btn">Launch Framework →</button>
+          </div>
+          
+          <div className="app-card insurance-card" onClick={() => setAppMode('insurance')}>
+            <div className="card-icon">🏥</div>
+            <h2>Insurance Check</h2>
+            <p>Manage insurance records and calculate premiums</p>
+            <ul className="feature-list">
+              <li>✓ Multi-country support</li>
+              <li>✓ Premium calculation</li>
+              <li>✓ Record management</li>
+            </ul>
+            <button className="launch-btn">Launch App →</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Agentic Framework Mode
+  if (appMode === 'agentic') {
+    return (
+      <div>
+        <button 
+          className="back-to-selector" 
+          onClick={() => setAppMode('selector')}
+        >
+          ← Back to Platform
+        </button>
+        <AgenticFramework />
+      </div>
+    );
+  }
+
+  // Insurance App Mode
   return (
     <div className="App">
+      <button 
+        className="back-to-selector" 
+        onClick={() => { setAppMode('selector'); setPage('landing'); setSelectedCountry(''); }}
+      >
+        ← Back to Platform
+      </button>
       <header className="App-header">
         <h1>Welcome to Insurance Check</h1>
       </header>

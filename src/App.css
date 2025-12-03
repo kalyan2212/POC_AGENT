@@ -1,8 +1,149 @@
 #root {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  width: 100%;
+}
+
+/* App Selector Styles */
+.app-selector {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #2a1a4a 100%);
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-selector h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #00d9ff 0%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.selector-subtitle {
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.app-cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.app-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 350px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  text-align: left;
+}
+
+.app-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.agentic-card:hover {
+  border-color: #00d9ff;
+  box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+}
+
+.insurance-card:hover {
+  border-color: #ff6b35;
+  box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.app-card h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.app-card > p {
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.feature-list li {
+  color: #b0b0b0;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.launch-btn {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.agentic-card .launch-btn {
+  background: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+  color: #000000;
+}
+
+.insurance-card .launch-btn {
+  background: linear-gradient(135deg, #ff6b35 0%, #e65c00 100%);
+  color: #ffffff;
+}
+
+.launch-btn:hover {
+  transform: scale(1.02);
+}
+
+/* Back Button */
+.back-to-selector {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #3a3a5a;
+  color: #00d9ff;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.back-to-selector:hover {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: #00d9ff;
 }
 
 .logo {

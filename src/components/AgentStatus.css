@@ -1,0 +1,112 @@
+.agent-status-panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+.agent-status-panel h3 {
+  color: #00d9ff;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.agent-card {
+  background: #0f0f23;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 2px solid #3a3a5a;
+  transition: all 0.3s ease;
+}
+
+.agent-card.idle {
+  border-color: #3a3a5a;
+}
+
+.agent-card.running {
+  border-color: #ffc107;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+}
+
+.agent-card.waiting {
+  border-color: #ff6b35;
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+}
+
+.agent-card.completed {
+  border-color: #28a745;
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.2);
+}
+
+.agent-card.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.2);
+}
+
+.agent-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.agent-icon {
+  font-size: 1.5rem;
+}
+
+.agent-name {
+  flex: 1;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.status-icon {
+  font-size: 1rem;
+}
+
+.agent-message {
+  color: #a0a0a0;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #3a3a5a;
+  border-radius: 2px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 30%;
+  background: linear-gradient(90deg, #ffc107, #ff6b35);
+  border-radius: 2px;
+  animation: progress-animation 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-animation {
+  0% {
+    width: 10%;
+    margin-left: 0;
+  }
+  50% {
+    width: 50%;
+    margin-left: 25%;
+  }
+  100% {
+    width: 10%;
+    margin-left: 90%;
+  }
+}

@@ -1,0 +1,178 @@
+.agentic-framework {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3e 100%);
+  color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.framework-header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.framework-header h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  background: linear-gradient(135deg, #00d9ff 0%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.framework-header .subtitle {
+  color: #a0a0a0;
+  font-size: 1rem;
+  margin: 0 0 2rem 0;
+}
+
+/* Workflow Progress Bar */
+.workflow-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.phase.active {
+  opacity: 1;
+}
+
+.phase.active .phase-icon {
+  background: linear-gradient(135deg, #00d9ff 0%, #00a8cc 100%);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.phase.completed {
+  opacity: 1;
+}
+
+.phase.completed .phase-icon {
+  background: #28a745;
+}
+
+.phase-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #3a3a5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.phase-label {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+.phase.active .phase-label,
+.phase.completed .phase-label {
+  color: #ffffff;
+}
+
+.phase-connector {
+  width: 40px;
+  height: 3px;
+  background: #3a3a5a;
+  margin: 0 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+}
+
+/* Main Content */
+.framework-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Restart Button */
+.restart-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.restart-btn {
+  padding: 1rem 2rem;
+  border: 2px solid #00d9ff;
+  background: transparent;
+  color: #00d9ff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+  background: rgba(0, 217, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Footer */
+.framework-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #6a6a8a;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .framework-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .workflow-progress {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .phase-connector {
+    display: none;
+  }
+  
+  .phase-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .phase-label {
+    font-size: 0.7rem;
+  }
+  
+  .framework-main {
+    padding: 1rem;
+  }
+}
